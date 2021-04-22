@@ -1,0 +1,35 @@
+name: mobile_service
+description: Firebase Application.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  get: ^4.1.4
+  google_fonts: ^2.0.0
+  flutter_svg: ^0.21.0+1
+  firebase_core: ^1.0.4
+  cloud_firestore: ^1.0.6
+  firebase_auth: ^1.1.1
+  change_app_package_name: ^1.0.0
+  carousel_slider: ^3.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+flutter:
+  assets:
+    - assets/
+
+  uses-material-design: true
+
