@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -5,8 +6,35 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_service/view/signin.dart';
 import 'package:mobile_service/widget/colors.dart';
 
-
 class SignUp extends StatelessWidget {
+  TextEditingController email = TextEditingController();
+  TextEditingController cpassword = TextEditingController();
+  TextEditingController password = TextEditingController();
+
+  bool _checkPassword() {
+    if (cpassword.text == password.text) {
+      return true;
+    }
+    return false;
+  }
+
+  void _regsisterUser(String _email, String _password) async {
+    if (_checkPassword()) {
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: _email, password: _password);
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          print('The password provided is too weak.');
+        } else if (e.code == 'email-already-in-use') {
+          print('The account already exists for that email.');
+        }
+      } catch (e) {
+        print(e);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +60,7 @@ class SignUp extends StatelessWidget {
               child: Column(
                 children: [
                   TextField(
+                      controller: email,
                       cursorColor: CustomColor.secondaryColor,
                       decoration: InputDecoration(
                           focusedBorder: new UnderlineInputBorder(
@@ -51,6 +80,7 @@ class SignUp extends StatelessWidget {
                     height: 30,
                   ),
                   TextField(
+                      controller: password,
                       obscureText: true,
                       cursorColor: CustomColor.secondaryColor,
                       decoration: InputDecoration(
@@ -72,9 +102,14 @@ class SignUp extends StatelessWidget {
                     height: 30,
                   ),
                   TextField(
+                    
+
+                      controller: cpassword,
                       obscureText: true,
                       cursorColor: CustomColor.secondaryColor,
+
                       decoration: InputDecoration(
+
                           labelText: 'Confirm Password',
                           focusedBorder: new UnderlineInputBorder(
                               borderSide: new BorderSide(
@@ -94,7 +129,7 @@ class SignUp extends StatelessWidget {
                   ),
                   FlatButton(
                     onPressed: () {
-                      Get.changeTheme(ThemeData.light());
+                      _regsisterUser(email.text, password.text);
                     },
                     padding: EdgeInsets.fromLTRB(120, 10, 120, 10),
                     shape: new RoundedRectangleBorder(

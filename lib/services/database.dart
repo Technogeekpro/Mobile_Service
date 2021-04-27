@@ -5,6 +5,7 @@ import 'package:mobile_service/model/user_model.dart';
 class Database {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+
   Future<bool> createNewUser(UserModel user) async {
     try {
       await _firestore.collection("users").doc(user.id).set({

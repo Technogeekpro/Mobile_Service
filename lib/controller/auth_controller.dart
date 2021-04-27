@@ -22,7 +22,7 @@ class FirebaseAuthController extends GetxController {
     try {
       UserCredential _authResult = await auth.signInWithEmailAndPassword(
           email: email.trim(), password: password);
-      Get.find<UserController>().user =
+      Get.put(UserController()).user =
       await Database().getUser(_authResult.user.uid);
     } catch (e) {
       Get.snackbar(
