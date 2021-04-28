@@ -3,8 +3,7 @@ import 'package:get/route_manager.dart';
 import 'package:get/get.dart';
 import 'package:mobile_service/binding/authBinding.dart';
 import 'package:firebase_core/firebase_core.dart';
-
-import 'package:mobile_service/view/signup.dart';
+import 'package:mobile_service/utils/root.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       initialBinding: AuthBinding(),
       debugShowCheckedModeBanner: false,
-      home: SignUp(),
+      home: Root(),
     );
   }
 }
