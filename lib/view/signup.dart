@@ -27,7 +27,7 @@ class SignUp extends StatelessWidget {
         if (e.code == 'weak-password') {
           print('The password provided is too weak.');
         } else if (e.code == 'email-already-in-use') {
-          print('The account already exists for that email.');
+          Get.snackbar("Error", 'The account already exists for that email.');
         }
       } catch (e) {
         print(e);
@@ -102,14 +102,10 @@ class SignUp extends StatelessWidget {
                     height: 30,
                   ),
                   TextField(
-                    
-
                       controller: cpassword,
                       obscureText: true,
                       cursorColor: CustomColor.secondaryColor,
-
                       decoration: InputDecoration(
-
                           labelText: 'Confirm Password',
                           focusedBorder: new UnderlineInputBorder(
                               borderSide: new BorderSide(
@@ -131,7 +127,7 @@ class SignUp extends StatelessWidget {
                     onPressed: () {
                       _regsisterUser(email.text, password.text);
                     },
-                    padding: EdgeInsets.fromLTRB(120, 10, 120, 10),
+                    padding: EdgeInsets.fromLTRB(100, 10, 100, 10),
                     shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(30.0)),
                     color: CustomColor.secondaryColor,
