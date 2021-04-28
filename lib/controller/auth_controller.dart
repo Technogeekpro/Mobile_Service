@@ -20,10 +20,14 @@ class FirebaseAuthController extends GetxController {
 
   void login(String email, String password) async {
     try {
+      //getting user in _authResult variable
       UserCredential _authResult = await auth.signInWithEmailAndPassword(
           email: email.trim(), password: password);
+
+      //Pushing logged user in userController
+      //UserController controller = Get.put(userController);
       Get.put(UserController()).user =
-      await Database().getUser(_authResult.user.uid);
+          await Database().getUser(_authResult.user.uid);
     } catch (e) {
       Get.snackbar(
         "Error signing in",
