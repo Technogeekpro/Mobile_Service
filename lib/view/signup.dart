@@ -123,20 +123,22 @@ class SignUp extends StatelessWidget {
                   SizedBox(
                     height: 60,
                   ),
-                  FlatButton(
-                    onPressed: () {
-                      _regsisterUser(email.text, password.text);
-                    },
-                    padding: EdgeInsets.fromLTRB(100, 10, 100, 10),
-                    shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0)),
-                    color: CustomColor.secondaryColor,
-                    child: Text('Sign Up',
-                        style: GoogleFonts.poppins(
-                          color: CustomColor.primaryColor,
-                          fontSize: 20,
-                        )),
-                  ),
+                  TextButton(
+                      onPressed: () {
+                        _regsisterUser(email.text, password.text);
+                      },
+                      style: TextButton.styleFrom(
+                        backgroundColor: CustomColor.secondaryColor,
+                        primary: CustomColor.primaryColor,
+                        padding: EdgeInsets.fromLTRB(120, 10, 120, 10),
+                        shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0)),
+                      ),
+                      child: Text('Register',
+                          style: GoogleFonts.poppins(
+                            color: CustomColor.primaryColor,
+                            fontSize: 20,
+                          ))),
                   SizedBox(height: 50),
                   Center(
                     child: Row(
