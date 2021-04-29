@@ -4,6 +4,7 @@ import 'package:mobile_service/controller/userController.dart';
 import 'package:mobile_service/services/database.dart';
 
 import 'package:flutter/material.dart';
+import 'package:mobile_service/view/home_screen.dart';
 
 class FirebaseAuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -13,7 +14,6 @@ class FirebaseAuthController extends GetxController {
 
   @override
   void onInit() {
-
     super.onInit();
     _firebaseUser.bindStream(auth.authStateChanges());
   }
@@ -28,15 +28,12 @@ class FirebaseAuthController extends GetxController {
       //UserController controller = Get.put(userController);
       Get.put(UserController()).user =
           await Database().getUser(_authResult.user.uid);
+      Get.to(HomeScreen());
     } catch (e) {
-      Get.snackbar(
-        "Error signing in",
-        e.message,
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-          colorText: Colors.white
-      );
+      Get.snackbar("Error signing in", e.message,
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white);
     }
   }
-
 }

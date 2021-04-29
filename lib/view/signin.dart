@@ -1,12 +1,13 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_service/controller/auth_controller.dart';
+import 'package:mobile_service/view/home_screen.dart';
 import 'package:mobile_service/view/signup.dart';
 import 'package:mobile_service/widget/colors.dart';
 
+// ignore: must_be_immutable
 class SignIn extends GetWidget<FirebaseAuthController> {
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
@@ -16,7 +17,6 @@ class SignIn extends GetWidget<FirebaseAuthController> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        centerTitle: true,
         backgroundColor: CustomColor.primaryColor,
         title: Text('SignIn',
             style: GoogleFonts.poppins(color: CustomColor.secondaryColor)),
@@ -77,8 +77,9 @@ class SignIn extends GetWidget<FirebaseAuthController> {
                   ),
                   TextButton(
                       onPressed: () async {
-                        controller.login(
-                            emailController.text, passwordController.text);
+                        // controller.login(
+                        //     emailController.text, passwordController.text);
+                        Get.to(HomeScreen());
                       },
                       style: TextButton.styleFrom(
                         backgroundColor: CustomColor.secondaryColor,

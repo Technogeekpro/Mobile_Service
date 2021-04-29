@@ -7,6 +7,7 @@ import 'package:mobile_service/view/home_screen.dart';
 import 'package:mobile_service/view/signin.dart';
 import 'package:mobile_service/widget/colors.dart';
 
+// ignore: must_be_immutable
 class SignUp extends StatelessWidget {
   FirebaseAuth _auth = FirebaseAuth.instance;
   TextEditingController email = TextEditingController();
@@ -23,6 +24,7 @@ class SignUp extends StatelessWidget {
   User user;
 
   void _registerUser(String _email, String _password) async {
+    _checkPassword();
     user = (await _auth.createUserWithEmailAndPassword(
       email: _email,
       password: _password,
@@ -50,11 +52,12 @@ class SignUp extends StatelessWidget {
         ),
       ),
       body: Stack(children: [
-        SvgPicture.asset('assets/back.svg',
-            alignment: Alignment.topCenter,
-            fit: BoxFit.cover,
-            width: 700,
-            height: 700),
+        SvgPicture.asset(
+          'assets/back.svg',
+          alignment: Alignment.topCenter,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+        ),
         Center(
           child: Container(
             padding: EdgeInsets.all(50),
@@ -70,7 +73,7 @@ class SignUp extends StatelessWidget {
                                   color: CustomColor.secondaryColor)),
                           labelText: 'Email or Phone',
                           labelStyle:
-                          TextStyle(color: CustomColor.secondaryColor),
+                              TextStyle(color: CustomColor.secondaryColor),
                           suffixIcon: Icon(
                             Icons.person,
                             color: CustomColor.secondaryColor,
@@ -92,7 +95,7 @@ class SignUp extends StatelessWidget {
                                   color: CustomColor.secondaryColor)),
                           focusColor: CustomColor.secondaryColor,
                           labelStyle:
-                          TextStyle(color: CustomColor.secondaryColor),
+                              TextStyle(color: CustomColor.secondaryColor),
                           suffixIcon: Icon(
                             Icons.lock_open_outlined,
                             color: CustomColor.secondaryColor,
@@ -114,7 +117,7 @@ class SignUp extends StatelessWidget {
                                   color: CustomColor.secondaryColor)),
                           focusColor: CustomColor.secondaryColor,
                           labelStyle:
-                          TextStyle(color: CustomColor.secondaryColor),
+                              TextStyle(color: CustomColor.secondaryColor),
                           suffixIcon: Icon(
                             Icons.lock,
                             color: CustomColor.secondaryColor,
@@ -125,10 +128,9 @@ class SignUp extends StatelessWidget {
                   SizedBox(
                     height: 60,
                   ),
-<<<<<<< HEAD
                   TextButton(
                       onPressed: () {
-                        _regsisterUser(email.text, password.text);
+                        _registerUser(email.text, password.text);
                       },
                       style: TextButton.styleFrom(
                         backgroundColor: CustomColor.secondaryColor,
@@ -142,22 +144,6 @@ class SignUp extends StatelessWidget {
                             color: CustomColor.primaryColor,
                             fontSize: 20,
                           ))),
-=======
-                  FlatButton(
-                    onPressed: () {
-                      _registerUser(email.text, password.text);
-                    },
-                    padding: EdgeInsets.fromLTRB(100, 10, 100, 10),
-                    shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0)),
-                    color: CustomColor.secondaryColor,
-                    child: Text('Sign Up',
-                        style: GoogleFonts.poppins(
-                          color: CustomColor.primaryColor,
-                          fontSize: 20,
-                        )),
-                  ),
->>>>>>> 40efe73ac2be6ba36e68f7e9660706339fda6040
                   SizedBox(height: 50),
                   Center(
                     child: Row(
