@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobile_service/view/home_screen.dart';
 import 'package:mobile_service/view/signin.dart';
 import 'package:mobile_service/widget/colors.dart';
 
 class SignUp extends StatelessWidget {
+  FirebaseAuth _auth = FirebaseAuth.instance;
   TextEditingController email = TextEditingController();
   TextEditingController cpassword = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -18,20 +20,20 @@ class SignUp extends StatelessWidget {
     return false;
   }
 
-  void _regsisterUser(String _email, String _password) async {
-    if (_checkPassword()) {
-      try {
-        UserCredential userCredential = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(email: _email, password: _password);
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'weak-password') {
-          print('The password provided is too weak.');
-        } else if (e.code == 'email-already-in-use') {
-          Get.snackbar("Error", 'The account already exists for that email.');
-        }
-      } catch (e) {
-        print(e);
-      }
+  User user;
+
+  void _registerUser(String _email, String _password) async {
+    user = (await _auth.createUserWithEmailAndPassword(
+      email: _email,
+      password: _password,
+    ))
+        .user;
+    if (user != null) {
+      Get.to(HomeScreen(), transition: Transition.downToUp);
+      // User registered successfully
+      //  Add user details in realtime database or cloudfirestore
+    } else {
+      // User not registered Successfully
     }
   }
 
@@ -68,7 +70,7 @@ class SignUp extends StatelessWidget {
                                   color: CustomColor.secondaryColor)),
                           labelText: 'Email or Phone',
                           labelStyle:
-                              TextStyle(color: CustomColor.secondaryColor),
+                          TextStyle(color: CustomColor.secondaryColor),
                           suffixIcon: Icon(
                             Icons.person,
                             color: CustomColor.secondaryColor,
@@ -90,7 +92,7 @@ class SignUp extends StatelessWidget {
                                   color: CustomColor.secondaryColor)),
                           focusColor: CustomColor.secondaryColor,
                           labelStyle:
-                              TextStyle(color: CustomColor.secondaryColor),
+                          TextStyle(color: CustomColor.secondaryColor),
                           suffixIcon: Icon(
                             Icons.lock_open_outlined,
                             color: CustomColor.secondaryColor,
@@ -112,7 +114,7 @@ class SignUp extends StatelessWidget {
                                   color: CustomColor.secondaryColor)),
                           focusColor: CustomColor.secondaryColor,
                           labelStyle:
-                              TextStyle(color: CustomColor.secondaryColor),
+                          TextStyle(color: CustomColor.secondaryColor),
                           suffixIcon: Icon(
                             Icons.lock,
                             color: CustomColor.secondaryColor,
@@ -123,6 +125,7 @@ class SignUp extends StatelessWidget {
                   SizedBox(
                     height: 60,
                   ),
+<<<<<<< HEAD
                   TextButton(
                       onPressed: () {
                         _regsisterUser(email.text, password.text);
@@ -139,6 +142,22 @@ class SignUp extends StatelessWidget {
                             color: CustomColor.primaryColor,
                             fontSize: 20,
                           ))),
+=======
+                  FlatButton(
+                    onPressed: () {
+                      _registerUser(email.text, password.text);
+                    },
+                    padding: EdgeInsets.fromLTRB(100, 10, 100, 10),
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0)),
+                    color: CustomColor.secondaryColor,
+                    child: Text('Sign Up',
+                        style: GoogleFonts.poppins(
+                          color: CustomColor.primaryColor,
+                          fontSize: 20,
+                        )),
+                  ),
+>>>>>>> 40efe73ac2be6ba36e68f7e9660706339fda6040
                   SizedBox(height: 50),
                   Center(
                     child: Row(
