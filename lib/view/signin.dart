@@ -1,5 +1,6 @@
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_service/controller/auth_controller.dart';
@@ -75,6 +76,7 @@ class SignIn extends GetWidget<FirebaseAuthController> {
                   SizedBox(
                     height: 60,
                   ),
+                  SizedBox(height: 50),
                   TextButton(
                       onPressed: () async {
                         // controller.login(
@@ -93,7 +95,41 @@ class SignIn extends GetWidget<FirebaseAuthController> {
                             color: CustomColor.primaryColor,
                             fontSize: 20,
                           ))),
-                  SizedBox(height: 50),
+                  SizedBox(height: 40),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 80),
+                    child: TextButton(
+                      onPressed: () async {
+                        // controller.login(
+                        //     emailController.text, passwordController.text);
+                      },
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        primary: Colors.redAccent,
+                        shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0)),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/google.png',
+                            width: 20,
+                          ),
+                          Text('Google Login',
+                              style: GoogleFonts.roboto(
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black,
+                                fontSize: 10,
+                              )),
+                          Icon(
+                            Icons.arrow_forward,
+                            size: 20,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   Center(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

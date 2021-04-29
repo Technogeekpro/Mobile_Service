@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_service/view/proceed_screen.dart';
 import 'package:mobile_service/widget/colors.dart';
-import 'package:mobile_service/widget/proceed_details.dart';
 
 class SubmitDetails extends StatelessWidget {
   @override
