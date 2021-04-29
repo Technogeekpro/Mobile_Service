@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_service/controller/auth_controller.dart';
+import 'package:mobile_service/view/signup.dart';
 import 'package:mobile_service/widget/colors.dart';
 
 class SignIn extends GetWidget<FirebaseAuthController> {
@@ -110,7 +111,7 @@ class SignIn extends GetWidget<FirebaseAuthController> {
                                     decoration: TextDecoration.underline,
                                     fontWeight: FontWeight.bold)),
                             onTap: () {
-                              Get.toNamed('/second');
+                              Get.to(SignUp());
                             }),
                       ],
                     ),
