@@ -133,7 +133,7 @@ class SignUp extends StatelessWidget {
                       style: TextButton.styleFrom(
                         backgroundColor: CustomColor.secondaryColor,
                         primary: CustomColor.primaryColor,
-                        padding: EdgeInsets.fromLTRB(120, 10, 120, 10),
+                        padding: EdgeInsets.fromLTRB(100, 10, 100, 10),
                         shape: new RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(30.0)),
                       ),
