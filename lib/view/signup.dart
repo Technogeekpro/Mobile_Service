@@ -1,43 +1,18 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mobile_service/view/home_screen.dart';
+import 'package:mobile_service/controller/auth_controller.dart';
+
 import 'package:mobile_service/view/signin.dart';
 import 'package:mobile_service/widget/colors.dart';
 
 // ignore: must_be_immutable
-class SignUp extends StatelessWidget {
-  FirebaseAuth _auth = FirebaseAuth.instance;
+class SignUp extends GetWidget<FirebaseAuthController> {
+  TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
-  TextEditingController cpassword = TextEditingController();
   TextEditingController password = TextEditingController();
-
-  bool _checkPassword() {
-    if (cpassword.text == password.text) {
-      return true;
-    }
-    return false;
-  }
-
-  User user;
-
-  void _registerUser(String _email, String _password) async {
-    _checkPassword();
-    user = (await _auth.createUserWithEmailAndPassword(
-      email: _email,
-      password: _password,
-    ))
-        .user;
-    if (user != null) {
-      Get.to(HomeScreen(), transition: Transition.downToUp);
-      // User registered successfully
-      //  Add user details in realtime database or cloudfirestore
-    } else {
-      // User not registered Successfully
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +40,32 @@ class SignUp extends StatelessWidget {
               child: Column(
                 children: [
                   TextField(
+                      controller: name,
+                      cursorColor: CustomColor.secondaryColor,
+                      decoration: InputDecoration(
+                          labelText: 'Full Name',
+                          focusedBorder: new UnderlineInputBorder(
+                              borderSide: new BorderSide(
+                                  color: CustomColor.secondaryColor)),
+                          focusColor: CustomColor.secondaryColor,
+                          labelStyle:
+                              TextStyle(color: CustomColor.secondaryColor),
+                          suffixIcon: Icon(
+                            Icons.lock,
+                            color: CustomColor.secondaryColor,
+                            size: 15,
+                          )),
+                      style: GoogleFonts.poppins(
+                          color: CustomColor.secondaryColor)),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  TextField(
                       controller: email,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.allow(
+                            RegExp("[a-z,@,.,0-9]")),
+                      ],
                       cursorColor: CustomColor.secondaryColor,
                       decoration: InputDecoration(
                           focusedBorder: new UnderlineInputBorder(
@@ -104,33 +104,12 @@ class SignUp extends StatelessWidget {
                       style: GoogleFonts.poppins(
                           color: CustomColor.secondaryColor)),
                   SizedBox(
-                    height: 30,
-                  ),
-                  TextField(
-                      controller: cpassword,
-                      obscureText: true,
-                      cursorColor: CustomColor.secondaryColor,
-                      decoration: InputDecoration(
-                          labelText: 'Confirm Password',
-                          focusedBorder: new UnderlineInputBorder(
-                              borderSide: new BorderSide(
-                                  color: CustomColor.secondaryColor)),
-                          focusColor: CustomColor.secondaryColor,
-                          labelStyle:
-                              TextStyle(color: CustomColor.secondaryColor),
-                          suffixIcon: Icon(
-                            Icons.lock,
-                            color: CustomColor.secondaryColor,
-                            size: 15,
-                          )),
-                      style: GoogleFonts.poppins(
-                          color: CustomColor.secondaryColor)),
-                  SizedBox(
                     height: 60,
                   ),
                   TextButton(
-                      onPressed: () {
-                        _registerUser(email.text, password.text);
+                      onPressed: () async {
+                        controller.registerUser(
+                            name.text, email.text, password.text);
                       },
                       style: TextButton.styleFrom(
                         backgroundColor: CustomColor.secondaryColor,

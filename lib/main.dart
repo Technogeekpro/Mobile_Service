@@ -3,10 +3,12 @@ import 'package:get/route_manager.dart';
 import 'package:get/get.dart';
 import 'package:mobile_service/binding/authBinding.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mobile_service/isSignIn.dart';
 import 'package:mobile_service/view/home_screen.dart';
-import 'package:mobile_service/view/signin.dart';
 
 import 'package:mobile_service/view/signup.dart';
+import 'package:mobile_service/view/proceed_screen.dart';
+import 'package:mobile_service/view/checkout_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,12 +22,12 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       initialBinding: AuthBinding(),
       debugShowCheckedModeBanner: false,
+      home: IsSignedIn(),
       routes: {
-        '/': (context) => SignIn(),
         '/signin': (cotext) => SignUp(),
         '/home': (context) => HomeScreen(),
-        // '/proceed': (context) => ProceedScreen(),
-        // '/checkout': (context) => CheckOut()
+        '/proceed': (context) => ProceedScreen(),
+        '/checkout': (context) => CheckOut()
       },
     );
   }

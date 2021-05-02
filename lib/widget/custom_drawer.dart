@@ -1,15 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:mobile_service/controller/auth_controller.dart';
+
 import 'package:mobile_service/widget/colors.dart';
 
-class CustomDrawer extends StatelessWidget {
+class CustomDrawer extends GetWidget<FirebaseAuthController> {
   const CustomDrawer({
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var user = FirebaseAuth.instance.currentUser;
+
     return Container(
       child: Drawer(
         child: Column(
@@ -35,7 +40,7 @@ class CustomDrawer extends StatelessWidget {
                 Navigator.of(context).pop();
               },
               child: Text(
-                'Profile',
+                '${user.email}',
                 style: GoogleFonts.poppins(
                     fontSize: 24, fontWeight: FontWeight.w500),
                 textAlign: TextAlign.center,
@@ -57,7 +62,7 @@ class CustomDrawer extends StatelessWidget {
               height: 45,
             ),
             Text(
-              'About',
+              "About",
               style: GoogleFonts.poppins(
                   fontSize: 24, fontWeight: FontWeight.w500),
               textAlign: TextAlign.center,
@@ -67,7 +72,7 @@ class CustomDrawer extends StatelessWidget {
             ),
             TextButton(
                 onPressed: () {
-                  Get.offAllNamed('/');
+                  controller.logout();
                 },
                 style: TextButton.styleFrom(
                   backgroundColor: CustomColor.primaryColor,
