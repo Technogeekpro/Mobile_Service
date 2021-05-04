@@ -6,7 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:mobile_service/isSignIn.dart';
 import 'package:mobile_service/view/home_screen.dart';
 
-import 'package:mobile_service/view/signup.dart';
+import 'package:mobile_service/view/register.dart';
 import 'package:mobile_service/view/proceed_screen.dart';
 import 'package:mobile_service/view/checkout_screen.dart';
 
