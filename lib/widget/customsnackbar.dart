@@ -4,10 +4,8 @@ import 'package:get/get.dart';
 import 'package:mobile_service/widget/colors.dart';
 
 void customsnackbar(String problem) {
-  Get.snackbar(
-    "Somthing Wrong",
-    "$problem",
-    backgroundColor: CustomColor.secondaryColor,
-    icon: Icon(Ionicons.warning_outline),
-  );
+  Get.snackbar("Somthing Wrong", "$problem",
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: CustomColor.secondaryColor,
+      icon: Icon(Ionicons.warning_outline));
 }

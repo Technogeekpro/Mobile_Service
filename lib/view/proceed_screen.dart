@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_service/widget/colors.dart';
 import 'package:mobile_service/widget/proceed_details.dart';
 
+// ignore: must_be_immutable
 class ProceedScreen extends StatelessWidget {
+  TextEditingController brand = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,7 +30,7 @@ class ProceedScreen extends StatelessWidget {
                     Column(
                       children: [
                         Text(
-                          "Google Pixel 2XL",
+                          '${Get.arguments}',
                           style: GoogleFonts.poppins(
                               color: CustomColor.secondaryColor),
                         ),
@@ -39,24 +42,24 @@ class ProceedScreen extends StatelessWidget {
                       ],
                     ),
                     Icon(
-                      Icons.phone,
+                      Ionicons.phone_portrait_outline,
                       color: CustomColor.secondaryColor,
                     ),
-                    TextButton(
-                        onPressed: () {
-                          Get.toNamed('/proceed');
-                        },
-                        style: TextButton.styleFrom(
-                          backgroundColor: CustomColor.secondaryColor,
-                          primary: CustomColor.primaryColor,
-                          // padding: EdgeInsets.fromLTRB(80, 15, 80, 15),
-                          shape: new RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(30.0)),
-                        ),
-                        child: Text('Submit',
-                            style: GoogleFonts.poppins(
-                              color: CustomColor.primaryColor,
-                            ))),
+                    // TextButton(
+                    //     onPressed: () {
+                    //       Get.toNamed('/proceed');
+                    //     },
+                    //     style: TextButton.styleFrom(
+                    //       backgroundColor: CustomColor.secondaryColor,
+                    //       primary: CustomColor.primaryColor,
+                    //       // padding: EdgeInsets.fromLTRB(80, 15, 80, 15),
+                    //       shape: new RoundedRectangleBorder(
+                    //           borderRadius: new BorderRadius.circular(30.0)),
+                    //     ),
+                    //     child: Text('Submit',
+                    //         style: GoogleFonts.poppins(
+                    //           color: CustomColor.primaryColor,
+                    //         ))),
                   ],
                 ),
               ),

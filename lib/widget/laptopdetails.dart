@@ -5,9 +5,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_service/controller/auth_controller.dart';
 
 import 'package:mobile_service/widget/colors.dart';
+import 'package:mobile_service/widget/customsnackbar.dart';
 
 // ignore: must_be_immutable
-class SubmitDetails extends GetWidget<FirebaseAuthController> {
+class LaptopDetails extends GetWidget<FirebaseAuthController> {
   TextEditingController brand = new TextEditingController();
   TextEditingController series = new TextEditingController();
   TextEditingController model = new TextEditingController();
@@ -66,23 +67,30 @@ class SubmitDetails extends GetWidget<FirebaseAuthController> {
                 ),
                 style: GoogleFonts.poppins(color: CustomColor.secondaryColor)),
             SizedBox(height: 40),
-            TextButton(
-                onPressed: () async {
-                  controller.detailSubmit(
-                      brand.text, series.text, model.text, imei.text);
-                },
-                style: TextButton.styleFrom(
-                  backgroundColor: CustomColor.secondaryColor,
-                  primary: CustomColor.primaryColor,
-                  padding: EdgeInsets.fromLTRB(120, 10, 120, 10),
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0)),
-                ),
-                child: Text('Submit',
-                    style: GoogleFonts.poppins(
-                      color: CustomColor.primaryColor,
-                      fontSize: 20,
-                    ))),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: TextButton(
+                  onPressed: () async {
+                    brand.text.isEmpty &&
+                            series.text.isEmpty &&
+                            model.text.isEmpty &&
+                            imei.text.isEmpty
+                        ? customsnackbar("Please Fill The Details")
+                        : controller.laptopdetails(
+                            brand.text, series.text, model.text, imei.text);
+                  },
+                  style: TextButton.styleFrom(
+                    backgroundColor: CustomColor.secondaryColor,
+                    primary: CustomColor.primaryColor,
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0)),
+                  ),
+                  child: Text('Submit',
+                      style: GoogleFonts.poppins(
+                        color: CustomColor.primaryColor,
+                        fontSize: 20,
+                      ))),
+            ),
           ],
         ),
       ),

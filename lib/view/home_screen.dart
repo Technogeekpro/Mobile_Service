@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:mobile_service/widget/colors.dart';
 import 'package:mobile_service/widget/custom_drawer.dart';
-import 'package:mobile_service/widget/submit_details.dart';
+import 'package:mobile_service/widget/laptopdetails.dart';
+import 'package:mobile_service/widget/mobiledetails.dart';
 import 'package:mobile_service/widget/image_slider.dart';
+import 'package:mobile_service/widget/tabletdetails.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -19,6 +22,7 @@ class HomeScreen extends StatelessWidget {
             ImageSlider(),
             Flexible(
               child: DefaultTabController(
+                initialIndex: 0,
                 length: 4,
                 child: Scaffold(
                   backgroundColor: CustomColor.primaryColor,
@@ -28,21 +32,29 @@ class HomeScreen extends StatelessWidget {
                     indicatorColor: CustomColor.secondaryColor,
                     tabs: [
                       Tab(
-                        icon: Icon(Icons.laptop),
+                        text: 'Laptops',
+                        icon: Icon(Ionicons.laptop_outline),
                       ),
-                      Tab(icon: Icon(Icons.mobile_off)),
-                      Tab(icon: Icon(Icons.desktop_mac)),
                       Tab(
-                        icon: Icon(Icons.chat_bubble_outline_outlined),
+                        text: 'Mobiles',
+                        icon: Icon(Ionicons.phone_portrait_outline),
+                      ),
+                      Tab(
+                        text: "Tablets",
+                        icon: Icon(Ionicons.tablet_landscape_outline),
+                      ),
+                      Tab(
+                        text: "Desktops",
+                        icon: Icon(MaterialCommunityIcons.desktop_tower),
                       ),
                     ],
                   ),
                   body: TabBarView(
                     children: [
-                      SubmitDetails(), //Details Widget present /widget/submit_details
-                      SubmitDetails(),
-                      SubmitDetails(),
-                      SubmitDetails(),
+                      LaptopDetails(),
+                      MobileDetails(),
+                      TabletDetails(),
+                      MobileDetails(),
                     ],
                   ),
                 ),

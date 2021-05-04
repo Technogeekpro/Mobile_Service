@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:mobile_service/view/home_screen.dart';
 import 'package:mobile_service/view/login.dart';
+import 'package:mobile_service/view/proceed_screen.dart';
 import 'package:mobile_service/widget/customsnackbar.dart';
 
 class FirebaseAuthController extends GetxController {
@@ -28,8 +29,8 @@ class FirebaseAuthController extends GetxController {
     String email,
     String password,
   ) async {
-    CollectionReference reference =
-        FirebaseFirestore.instance.collection("users");
+    DocumentReference reference =
+        FirebaseFirestore.instance.collection("users").doc(email);
     String role = "users";
 
     Map<String, String> userdata = {
@@ -40,33 +41,121 @@ class FirebaseAuthController extends GetxController {
 
     await _auth
         .createUserWithEmailAndPassword(email: email, password: password)
-        .then((value) {
-      reference.add(userdata).then((value) => Get.offAll(SignIn()));
+        .then((value) async {
+      await reference.set(userdata).then((value) => Get.offAll(SignIn()));
     }).catchError((onError) => customsnackbar(onError.message));
   }
 
-  void detailSubmit(
+  void mobiledetails(
     String brand,
     String series,
     String model,
     String imei,
   ) async {
-    CollectionReference submit = FirebaseFirestore.instance.collection('users');
+    String email = _auth.currentUser.email.toString();
     String uid = _auth.currentUser.uid.toString();
+    DocumentReference submit =
+        FirebaseFirestore.instance.collection('users').doc(email);
 
+    String device = "Mobile";
     Map<String, String> mobileDetails = {
+      'Device': device,
       'brand': brand,
       'series': series,
       'model': model,
       'imei': imei,
       'uid': uid,
     };
+
     await submit
-        .doc('1')
-        .collection('mobiledetails')
+        .collection('Mobile_Details')
         .add(mobileDetails)
-        .then((value) => print('added'))
-        .onError((error, stackTrace) => print('failed'));
+        .then((value) => Get.to(ProceedScreen(), arguments: brand))
+        .onError((error, stackTrace) => customsnackbar(error.message));
+  }
+
+  void desktopdetails(
+    String brand,
+    String series,
+    String model,
+    String imei,
+  ) async {
+    String email = _auth.currentUser.email.toString();
+    String uid = _auth.currentUser.uid.toString();
+    DocumentReference submit =
+        FirebaseFirestore.instance.collection('users').doc(email);
+
+    String device = "Desktop";
+    Map<String, String> mobileDetails = {
+      'Device': device,
+      'brand': brand,
+      'series': series,
+      'model': model,
+      'imei': imei,
+      'uid': uid,
+    };
+
+    await submit
+        .collection('Desktop_Details')
+        .add(mobileDetails)
+        .then((value) => Get.to(ProceedScreen(), arguments: brand))
+        .onError((error, stackTrace) => customsnackbar(error.message));
+  }
+
+  void tabletdetails(
+    String brand,
+    String series,
+    String model,
+    String imei,
+  ) async {
+    String email = _auth.currentUser.email.toString();
+    String uid = _auth.currentUser.uid.toString();
+    DocumentReference submit =
+        FirebaseFirestore.instance.collection('users').doc(email);
+
+    String device = "Tablet";
+    Map<String, String> mobileDetails = {
+      'Device': device,
+      'brand': brand,
+      'series': series,
+      'model': model,
+      'imei': imei,
+      'uid': uid,
+    };
+
+    await submit
+        .collection('Tablet_Details')
+        .add(mobileDetails)
+        .then((value) => Get.to(ProceedScreen(), arguments: brand))
+        .onError((error, stackTrace) => customsnackbar(error.message));
+  }
+
+  void laptopdetails(
+    String brand,
+    String series,
+    String model,
+    String imei,
+  ) async {
+    String email = _auth.currentUser.email.toString();
+    String uid = _auth.currentUser.uid.toString();
+    DocumentReference submit =
+        FirebaseFirestore.instance.collection('users').doc(email);
+
+    String device = 'Laptop';
+    Map<String, String> laptopDetails = {
+      'Device': device,
+      'brand': brand,
+      'series': series,
+      'model': model,
+      'imei': imei,
+      'uid': uid,
+    };
+
+    await submit
+        .collection('Laptop_Details')
+        .add(laptopDetails)
+        .then((value) => Get.to(ProceedScreen(), arguments: brand))
+        .onError((error, stackTrace) => customsnackbar(error.message));
   }
 
   GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);

@@ -70,21 +70,23 @@ class CustomDrawer extends GetWidget<FirebaseAuthController> {
             SizedBox(
               height: 45,
             ),
-            TextButton(
-                onPressed: () {
-                  controller.logout();
-                },
-                style: TextButton.styleFrom(
-                  backgroundColor: CustomColor.primaryColor,
-                  padding: EdgeInsets.fromLTRB(80, 10, 80, 10),
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0)),
-                ),
-                child: Text('Logout',
-                    style: GoogleFonts.poppins(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500))),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: TextButton(
+                  onPressed: () {
+                    controller.logout();
+                  },
+                  style: TextButton.styleFrom(
+                    backgroundColor: CustomColor.primaryColor,
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0)),
+                  ),
+                  child: Text('Logout',
+                      style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500))),
+            ),
             SizedBox(
               height: 45,
             ),

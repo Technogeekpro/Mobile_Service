@@ -35,7 +35,7 @@ class SignUp extends GetWidget<FirebaseAuthController> {
         ),
         Center(
           child: Container(
-            padding: EdgeInsets.all(50),
+            padding: EdgeInsets.all(20),
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -71,7 +71,7 @@ class SignUp extends GetWidget<FirebaseAuthController> {
                           focusedBorder: new UnderlineInputBorder(
                               borderSide: new BorderSide(
                                   color: CustomColor.secondaryColor)),
-                          labelText: 'Email or Phone',
+                          labelText: 'Email',
                           labelStyle:
                               TextStyle(color: CustomColor.secondaryColor),
                           suffixIcon: Icon(
@@ -89,40 +89,38 @@ class SignUp extends GetWidget<FirebaseAuthController> {
                       obscureText: true,
                       cursorColor: CustomColor.secondaryColor,
                       decoration: InputDecoration(
-                          labelText: 'Password',
-                          focusedBorder: new UnderlineInputBorder(
-                              borderSide: new BorderSide(
-                                  color: CustomColor.secondaryColor)),
-                          focusColor: CustomColor.secondaryColor,
-                          labelStyle:
-                              TextStyle(color: CustomColor.secondaryColor),
-                          suffixIcon: Icon(
-                            Icons.lock_open_outlined,
-                            color: CustomColor.secondaryColor,
-                            size: 15,
-                          )),
+                        labelText: 'Password',
+                        focusedBorder: new UnderlineInputBorder(
+                            borderSide: new BorderSide(
+                                color: CustomColor.secondaryColor)),
+                        focusColor: CustomColor.secondaryColor,
+                        labelStyle:
+                            TextStyle(color: CustomColor.secondaryColor),
+                      ),
                       style: GoogleFonts.poppins(
                           color: CustomColor.secondaryColor)),
                   SizedBox(
                     height: 60,
                   ),
-                  TextButton(
-                      onPressed: () async {
-                        controller.registerUser(
-                            name.text, email.text, password.text);
-                      },
-                      style: TextButton.styleFrom(
-                        backgroundColor: CustomColor.secondaryColor,
-                        primary: CustomColor.primaryColor,
-                        padding: EdgeInsets.fromLTRB(100, 10, 100, 10),
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0)),
-                      ),
-                      child: Text('Register',
-                          style: GoogleFonts.poppins(
-                            color: CustomColor.primaryColor,
-                            fontSize: 20,
-                          ))),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: TextButton(
+                        onPressed: () async {
+                          controller.registerUser(
+                              name.text, email.text, password.text);
+                        },
+                        style: TextButton.styleFrom(
+                          backgroundColor: CustomColor.secondaryColor,
+                          primary: CustomColor.primaryColor,
+                          shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(30.0)),
+                        ),
+                        child: Text('Register',
+                            style: GoogleFonts.poppins(
+                              color: CustomColor.primaryColor,
+                              fontSize: 20,
+                            ))),
+                  ),
                   SizedBox(height: 50),
                   Center(
                     child: Row(

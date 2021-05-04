@@ -9,6 +9,7 @@ import 'package:mobile_service/view/register.dart';
 import 'package:mobile_service/widget/colors.dart';
 import 'package:mobile_service/widget/customsnackbar.dart';
 import 'package:mobile_service/widget/googleSign.dart';
+// import 'package:mobile_service/widget/loading.dart';
 
 // ignore: must_be_immutable
 class SignIn extends GetWidget<FirebaseAuthController> {
@@ -33,7 +34,7 @@ class SignIn extends GetWidget<FirebaseAuthController> {
           height: MediaQuery.of(context).size.height,
         ),
         Container(
-          padding: EdgeInsets.all(50),
+          padding: EdgeInsets.all(20),
           child: Center(
             child: SingleChildScrollView(
               child: Column(
@@ -49,7 +50,7 @@ class SignIn extends GetWidget<FirebaseAuthController> {
                           focusedBorder: new UnderlineInputBorder(
                               borderSide: new BorderSide(
                                   color: CustomColor.secondaryColor)),
-                          labelText: 'Email or Phone',
+                          labelText: 'Email',
                           labelStyle:
                               TextStyle(color: CustomColor.secondaryColor),
                           suffixIcon: Icon(
@@ -80,29 +81,33 @@ class SignIn extends GetWidget<FirebaseAuthController> {
                       style: GoogleFonts.poppins(
                           color: CustomColor.secondaryColor)),
                   SizedBox(
-                    height: 60,
+                    height: 40,
                   ),
                   SizedBox(height: 50),
-                  TextButton(
-                      onPressed: () async {
-                        emailController.text.isEmpty &&
-                                passwordController.text.isEmpty
-                            ? customsnackbar("problem")
-                            : controller.login(
-                                emailController.text, passwordController.text);
-                      },
-                      style: TextButton.styleFrom(
-                        backgroundColor: CustomColor.secondaryColor,
-                        primary: CustomColor.primaryColor,
-                        padding: EdgeInsets.fromLTRB(120, 10, 120, 10),
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0)),
-                      ),
-                      child: Text('Login',
-                          style: GoogleFonts.poppins(
-                            color: CustomColor.primaryColor,
-                            fontSize: 20,
-                          ))),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: TextButton(
+                        onPressed: () async {
+                          // showLoading();
+
+                          emailController.text.isEmpty &&
+                                  passwordController.text.isEmpty
+                              ? customsnackbar("Please Enter Email & Password")
+                              : controller.login(emailController.text,
+                                  passwordController.text);
+                        },
+                        style: TextButton.styleFrom(
+                          backgroundColor: CustomColor.secondaryColor,
+                          primary: CustomColor.primaryColor,
+                          shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(30.0)),
+                        ),
+                        child: Text('Login',
+                            style: GoogleFonts.poppins(
+                              color: CustomColor.primaryColor,
+                              fontSize: 20,
+                            ))),
+                  ),
                   SizedBox(height: 20),
                   GestureDetector(
                       child: Text("Forget Password",
@@ -115,6 +120,9 @@ class SignIn extends GetWidget<FirebaseAuthController> {
                       }),
                   SocialSignWidgetRow(),
                   SizedBox(height: 40),
+                  Divider(
+                    color: CustomColor.secondaryColor,
+                  ),
                   Center(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

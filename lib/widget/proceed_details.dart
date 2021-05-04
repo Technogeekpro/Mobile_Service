@@ -64,22 +64,24 @@ class ProceedDetails extends StatelessWidget {
               ),
               style: GoogleFonts.poppins(color: CustomColor.secondaryColor)),
           SizedBox(height: 40),
-          TextButton(
-              onPressed: () {
-                Get.to(CheckOut());
-              },
-              style: TextButton.styleFrom(
-                backgroundColor: CustomColor.secondaryColor,
-                primary: CustomColor.primaryColor,
-                padding: EdgeInsets.fromLTRB(120, 10, 120, 10),
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(30.0)),
-              ),
-              child: Text('Proceed',
-                  style: GoogleFonts.poppins(
-                    color: CustomColor.primaryColor,
-                    fontSize: 20,
-                  ))),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: TextButton(
+                onPressed: () {
+                  Get.to(CheckOut());
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor: CustomColor.secondaryColor,
+                  primary: CustomColor.primaryColor,
+                  shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(30.0)),
+                ),
+                child: Text('Proceed',
+                    style: GoogleFonts.poppins(
+                      color: CustomColor.primaryColor,
+                      fontSize: 20,
+                    ))),
+          ),
         ],
       ),
     );

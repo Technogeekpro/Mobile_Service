@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_service/widget/colors.dart';
@@ -9,10 +9,7 @@ showLoading() {
       radius: 10,
       titleStyle: GoogleFonts.poppins(),
       title: "Loading",
-      content: CircularProgressIndicator.adaptive(
-        valueColor:
-            new AlwaysStoppedAnimation<Color>(CustomColor.secondaryColor),
-        backgroundColor: CustomColor.primaryColor,
-        strokeWidth: 1,
+      content: SpinKitSpinningCircle(
+        color: CustomColor.primaryColor,
       ));
 }
